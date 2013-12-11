@@ -10,6 +10,8 @@ var impress = require('impressViewer')
 
 // Save current question id;
 var questionId = null, socket, session;
+var roomId = {};
+var actualRoomId;
 
 $(function(){
 	var $body = $('body')
@@ -17,10 +19,9 @@ $(function(){
     , port  		= parseInt($body.attr('asq-port'))
     , sessionId = $body.attr('asq-session-id')
     , mode 			= $body.attr('asq-socket-mode')
-
   assessment.initCodeEditors();
 
-	impress().init();
+	impress().init(); 
 	connect(host, port, sessionId, mode)
 })
 
@@ -28,13 +29,13 @@ $(function(){
 var connect = function(host, port, session, mode) {
 	var started = false;
 	session = session;
-	socket = io.connect('http://' + host + ':' + port + '/folo?sid=' + session);
+	socket = io.connect('http://' + host + ':' + port + '/folo?sid=' + session );
 	
 	socket.on('connect', function(event) {
 		// console.log("connected")
 		socket.emit('asq:viewer', {
 			session : session,
-			mode : mode
+			mode : mode,
 		});
 		$('.asq-welcome-screen h4').text("You are connected to the presentation.");
 
@@ -63,6 +64,17 @@ var connect = function(host, port, session, mode) {
 		socket.on('asq:hide-answer', function(event) {
 			$('#answer').modal('hide');
 		});
+
+		socket.on('asq:set-groupid', function(event){
+			if (roomdId.hasOwnProperty(event.questionId)){
+				actualRoomId = roomdId[event.questionId];
+			}
+			else{
+				rooomId.event.questionId = event.groupId;
+				actualRoomId = event.groupId;
+			}
+		});
+
 
 		/**
 		 Handle socket event 'goto'
@@ -317,7 +329,6 @@ function drawChart() {
 	})
 }
 
-
 $('a[data-toggle="tab"]').on('shown', function(e) {
 
 	var questionId = $(this).parents().find(".stats").attr('target-assessment-id');
@@ -387,4 +398,8 @@ function requestStats(questionId, obj) {
 		obj.data[questionId] = google.visualization.arrayToDataTable(data);
 		obj.chart[questionId].draw(obj.data[questionId], obj.options);
 	});
+}
+
+var propagate = function(eventname, event){
+	socket.emit('asq:propagate', {eventname: eventname, evt: event, roomId: actualRoomId})
 }
