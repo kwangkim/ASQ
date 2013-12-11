@@ -31,7 +31,10 @@
         <div class="togetherjs-person togetherjs-person-self"></div>
         <div id="togetherjs-profile-arrow"></div>
       </button>
-      <!--<button id="togetherjs-share-button" class="togetherjs-button" title="Add a friend"></button>-->
+      <!-- Modified -->
+
+      <!-- <button id="togetherjs-share-button" class="togetherjs-button" title="Add a friend"></button> -->
+
       <button id="togetherjs-audio-button" class="togetherjs-button" title="Turn on microphone">
         <span id="togetherjs-audio-unavailable" class="togetherjs-audio-set" data-toggles=".togetherjs-audio-set">
         </span>
@@ -72,8 +75,8 @@
     </section>
   </div>
 
-  <!-- The window for sharing the link: -->
-<!--   <div id="togetherjs-share" class="togetherjs-window"
+   <!-- The window for sharing the link: -->
+  <div id="togetherjs-share" class="togetherjs-window"
        data-bind-to="#togetherjs-share-button" style="display: none">
     <header> Invite a friend </header>
     <section>
@@ -83,8 +86,8 @@
       </div>
       <div class="togetherjs-only-mobile">
         <p>Copy and paste this link over IM or email:</p>
-        <input type="text" class="togetherjs-share-link"> -->
-        <!-- <a class="togetherjs-share-link" href="#">Press your thumb here.</a>
+        <input type="text" class="togetherjs-share-link">
+        <!-- <a class="togetherjs-share-link" href="#">Press your thumb here.</a> -->
       </div>
     </section>
   </div>
@@ -131,20 +134,25 @@
         <span class="togetherjs-person-role"></span>
       </p>
 
-      <p class="togetherjs-participant-window-row"><strong>Currently at:</strong>
+      <div id="message"><p id="message2" ><strong>Send Message</strong></p>
+      </div>
+
+      <!-- commented -->
+      <!-- <p class="togetherjs-participant-window-row"><strong>Currently at:</strong>
         <a class="togetherjs-person-url togetherjs-person-url-title"></a>
-      </p>
+      </p> -->
 
       <p class="togetherjs-participant-window-row"><strong>Status:</strong>
         <span class="togetherjs-person-status"></span>
       </p>
 
-      <p class="togetherjs-participant-window-row"><strong class="togetherjs-float-left">Follow this participant:</strong>
+      <!-- commented -->
+      <!-- <p class="togetherjs-participant-window-row"><strong class="togetherjs-float-left">Follow this participant:</strong>
         <label class="togetherjs-follow-question togetherjs-float-left" for="togetherjs-person-status-follow">
           <input type="checkbox" id="togetherjs-person-status-follow">
         </label>
         <span class="togetherjs-clear"></span>
-      </p>
+      </p> -->
 
     </section>
 

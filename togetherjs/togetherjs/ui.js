@@ -41,7 +41,8 @@ define(["require", "jquery", "util", "session", "templates", "templating", "link
      be hidden when this element is shown. */
   ui.displayToggle = function (el) {
     el = $(el);
-    assert(el.length, "No element", arguments[0]);
+    //maybe problems
+    assert(el.length, "No ciao", arguments[0]);
     var other = $(el.attr("data-toggles"));
     assert(other.length, "Cannot toggle", el[0], "selector", other.selector);
     other.hide();
@@ -171,7 +172,7 @@ define(["require", "jquery", "util", "session", "templates", "templating", "link
     ui.container.find(".togetherjs-window > header, .togetherjs-modal > header").each(function () {
       $(this).append($('<button class="togetherjs-close"></button>'));
     });
-
+    // modify
     TogetherJS.config.track("disableWebRTC", function (hide, previous) {
       if (hide && ! previous) {
         ui.container.find("#togetherjs-audio-button").hide();
@@ -206,6 +207,7 @@ define(["require", "jquery", "util", "session", "templates", "templating", "link
     }
 
     // The share link:
+    // modify
     ui.prepareShareLink(container);
     container.find("input.togetherjs-share-link").on("keydown", function (event) {
       if (event.which == 27) {
@@ -395,6 +397,7 @@ define(["require", "jquery", "util", "session", "templates", "templating", "link
     if($.browser.mobile) {
 
       // toggle the audio button
+      // modify
       $("#togetherjs-audio-button").click(function () {
         windowing.toggle("#togetherjs-rtc-not-supported");
       });
@@ -423,7 +426,7 @@ define(["require", "jquery", "util", "session", "templates", "templating", "link
           openDock();
       });
     }
-
+    // modify
     $("#togetherjs-share-button").click(function () {
       windowing.toggle("#togetherjs-share");
     });
@@ -544,7 +547,9 @@ define(["require", "jquery", "util", "session", "templates", "templating", "link
         if (! $.browser.mobile) {
           $("#togetherjs-chat-input").focus();
         }
-      } else if (id == "togetherjs-share") {
+      }
+      // modify 
+      else if (id == "togetherjs-share") {
         var link = element.find("input.togetherjs-share-link");
         if (link.is(":visible")) {
           link.focus().select();
@@ -689,7 +694,7 @@ define(["require", "jquery", "util", "session", "templates", "templating", "link
       }
     });
   }
-
+  // modify
   ui.prepareShareLink = function (container) {
     container.find("input.togetherjs-share-link").click(function () {
       $(this).select();
@@ -789,15 +794,16 @@ define(["require", "jquery", "util", "session", "templates", "templating", "link
     assert(buttons && Math.floor(buttons) == buttons);
     var iface = $("#togetherjs-dock");
     var newHeight = iface.height() + (BUTTON_HEIGHT * buttons);
-    assert(newHeight >= BUTTON_HEIGHT * 3, "Height went too low (", newHeight,
-           "), should never be less than 3 buttons high (", BUTTON_HEIGHT * 3, ")");
+    // 2 instead of 3
+    assert(newHeight >= BUTTON_HEIGHT * 2, "Height went too low (", newHeight,
+           "), should never be less than 3 buttons high (", BUTTON_HEIGHT * 2, ")");
     iface.css({
       height: newHeight + "px"
     });
   }
 
   // Misc
-
+  // modify
   function updateShareLink() {
     var input = $("input.togetherjs-share-link");
     var link = $("a.togetherjs-share-link");

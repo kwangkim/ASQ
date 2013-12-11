@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="https://togetherjs.com/tohetherjs-min.js"></script>
 <title>ACE in Action</title>
 <style type="text/css" media="screen">
 *{
@@ -13,18 +14,12 @@
     }
 </style>
 </head>
-<body>
+<body onload="TogetherJS(this)">
 
 <div id="editor">function foo(items) {
     var x = "All this is syntax highlighted";
     return x;
 }</div>
-
-<button id="start-togetherjs" type="button"
- onclick="TogetherJS(this); return false"
- data-end-togetherjs-html="End TogetherJS">
-  Start TogetherJS
-</button>
 
     
 <script src="ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -33,10 +28,15 @@
   // TogetherJS configuration would go here, but we'll talk about that
   // later
   TogetherJSConfig_hubBase = "http://127.0.0.1:8080";
-  TogetherJSConfig_dontShowClicks = '#editor'
+  TogetherJSConfig_dontShowClicks = true;
+  TogetherJSConfig_disableWebRTC = true;
+  TogetherJSConfig_suppressInvite = true;
+  TogetherJSConfig_suppressJoinConfirmation=true;
+  TogetherJSConfig_autoStart =true;
+
 
 </script>
-<script src="/togetherjs/build/togetherjs-min.js"></script>
+<script src="../togetherjs-min.js"></script>
 <script>
     var editor = ace.edit("editor");
     var session = editor.getSession()
