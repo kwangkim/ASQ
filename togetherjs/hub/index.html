@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	var socket = io.connect(document.URL);
+
+	var Userdata = {
+		id: undefined 
+	};
+
+	socket.on('documentModification', function (data) {
+		console.log(data);
+	});
+
+	socket.on('chatMessage', function (data) {
+  		console.log(data);
+  		document.getElementById("messages").innerHTML = data + "</br>" + document.getElementById("messages").innerHTML;
+  	});
+
+	socket.on('connect', function() {
+  		console.log('Connected to server');
+  	});
+
+  	socket.on('yourId', function (data) {
+  		Userdata.id = data;
+  		console.log('Connected to server with id: ' + data);
+  	});
+
+  	socket.on('newConnectionId', function (data) {
+  		console.log('User with id ' + data + ' connected to server');
+  	});
+
+  	var sendEvent = function () {
+  		socket.emit('chatMessage', document.getElementById("message").value);
+  	}
+  	
+</script>
+Message: <input type="text" id="message"><br>
+<button type="button" onclick="sendEvent()">Send message</button>
+<div id="messages">
+</div>
+
+</body>
+</html>
