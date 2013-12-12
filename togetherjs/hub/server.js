@@ -243,6 +243,7 @@ wsServer.on('request', function(request) {
   }
 
   var id = request.httpRequest.url.replace(/^\/+hub\/+/, '').replace(/\//g, "");
+  console.log("id = "+id);
   if (! id) {
     request.reject(404, 'No ID Found');
     return;
