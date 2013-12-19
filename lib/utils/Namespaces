@@ -1,0 +1,27 @@
+Namespaces
+ctrl
+follo
+wrtap
+
+
+rooms
+sessionID
+
+
+1.) Findout how to route rooms in rooms
+	http://asq.inf.usi.ch:27100/folo?sid=54500feeef22211_00004
+
+
+var notifySessionRoom = function(eventName, evt, io, sessionId, roomId, namespaces) {
+	if (arguments.length < 5) {
+		return;
+	}
+	var args = Array.prototype.slice.call(arguments, 4);
+	for (var i=0; i<args.length; i++) {
+		io.of('/' + args[i]).in(roomId+'@'+sessionId).emit(eventName, evt);
+	}
+}
+
+Limitations: 
+1) use the same socket object
+2) you have to be able to send and receive from both the client and the server
