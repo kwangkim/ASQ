@@ -52,7 +52,7 @@ function connect(host, port, session, mode, token) {
   this.assessmentSaved = false;
   this.isAssessing = false;
   var that = this;
-  var socketUrl =  window.location.protocol + '//' + host + '/folo';
+  var socketUrl =  window.location.protocol + '//' + host + ':' + port + '/folo';
   var socket = this.socket = io.connect(socketUrl, { 
     'query': 'token=' + token+'&asq_sid=' + session 
   });

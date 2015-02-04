@@ -31,7 +31,7 @@ $(function(){
 
 function connect(host, port, session, mode, token) {
   debug('Connecting to socket server');
-  var socketUrl =  window.location.protocol + '//' + host + '/ctrl';
+  var socketUrl =  window.location.protocol + '//' + host + ':' + port + '/ctrl';
   var socket = io.connect(socketUrl, { 
     'query': 'token=' + token+'&asq_sid=' + session 
   });
